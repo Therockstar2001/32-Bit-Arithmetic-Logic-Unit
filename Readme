@@ -1,0 +1,78 @@
+# SystemVerilog Parameterized ALU (RTL + Self-Checking Testbench)
+
+## Overview
+This project implements a **parameterized Arithmetic Logic Unit (ALU)** using **synthesizable SystemVerilog RTL**, along with a **self-checking verification testbench**.
+
+The purpose of this repository is to demonstrate **fundamental RTL design skills** and **basic verification methodology** that are commonly expected in **ASIC / FPGA Design Verification** roles.
+
+---
+
+## Features
+- Parameterized data width (default **32-bit**)
+- Pure **combinational RTL** using `always_comb`
+- Fully synthesizable design (no delays or simulation-only constructs)
+- Supports common arithmetic and logical operations
+- Self-checking testbench with:
+  - Directed tests
+  - Randomized stimulus
+  - Golden reference model
+- Automatic PASS / FAIL reporting
+- Clean, industry-style project structure
+
+---
+
+## Supported ALU Operations
+
+| Opcode | Operation |
+|------|----------|
+| `0x0` | Addition (`A + B`) |
+| `0x1` | Subtraction (`A - B`) |
+| `0x2` | Bitwise AND |
+| `0x3` | Bitwise OR |
+| `0x4` | Bitwise XOR |
+| `0x5` | Set Less Than (signed) |
+| `0x6` | Shift Left Logical |
+| `0x7` | Shift Right Logical |
+
+---
+
+## Verification Methodology
+
+# Testbench applies:
+
+Directed sanity tests
+Randomized test vectors
+A golden reference model computes expected ALU outputs
+DUT output is automatically compared against the expected results
+Any mismatches are reported with detailed debug information
+Final simulation result reports overall PASS or FAIL
+This approach avoids manual waveform inspection and reflects a verification-oriented design mindset.
+
+## Running the Simulation (EDA Playground-Aldec Riviera-PRO)
+Compile
+vlib work
+vlog -sv rtl/alu.sv tb/tb_alu.sv
+
+Run (command-line mode)
+vsim -c tb_alu -do "run -all; exit"
+
+Run (GUI mode)
+vsim tb_alu
+
+
+## Expected output:
+
+ALL TESTS PASSED
+
+# Tools Used
+SystemVerilog (IEEE 1800)
+Aldec Riviera-PRO (compile and simulation)
+Riviera-PRO waveform viewer (optional)
+
+## Possible Extensions
+
+Add carry, overflow, and sign flags
+Implement a pipelined ALU
+Add SystemVerilog Assertions (SVA)
+Add functional coverage
+Extend verification using UVM
